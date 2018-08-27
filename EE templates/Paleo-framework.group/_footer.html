@@ -1,0 +1,133 @@
+		<div class="container-fluid" id="footer">
+			<div class="container text-light">
+				<div class="row row-1">
+					<div class="col">
+					{exp:channel:entries channel="pages" entry_id="32"}
+						<h4>{title}</h4>
+						{page_content}
+					{/exp:channel:entries}
+					</div>
+					<div class="col">
+						<h4>Recent Posts</h4>
+						<?php
+
+							$limit = 4;
+							$url = "http://paleosun.com/blog/rss/"; 
+
+							$rss = simplexml_load_file($url);
+							if($rss)  { 
+								$items = $rss->channel->item; 
+								echo "<ul class=\"list-unstyled\">\n";
+								$x=0;
+								foreach($items as $item) 
+								{ 
+									if ( $x < $limit ) {
+										$title = $item->title; 
+										$link = $item->link; 
+										$img_attr = $item->children("media", true)->thumbnail->attributes(); 
+										$pub_date = $item->pubDate; 
+
+										echo "<li>\n";
+										echo '<a href="' . $link . '">'; 
+										echo $title; 
+										echo '</a>'; 
+										echo "</li>\n";
+									} 
+									$x++;
+								}
+								echo "</ul>\n";
+							}  
+
+						?>
+					</div>
+					<div class="col">
+						<h4>Twitter Widget</h4>
+						<!--
+						Twitter has made it harder, and much more time consuming to use their API, and the rss feed I could get doesn't have this data... Wasn't specified as a requirement, so I ignored.
+						Highlightling @ character: ::first-letter doesn't work for @ in firefox!!! How aggrevating! 
+						Had to put a class around it. Would probably have to use Jquery selector to change this since it would presumably 
+						be dynamic data.
+						-->
+						<ul class="list-unstyled">
+							<li>
+								<div class="tweet">
+									<a href="#"><span class="at">@</span><span class="user-name">pixelmater</span> What an awesome design with great functionality :)</a>
+								</div>
+								<div class="timestamp">
+									about 1 hour ago
+								</div>
+							</li>
+							<li>
+								<div class="tweet">
+									<a href="#"><span class="at">@</span><span class="user-name">designdude</span> What an awesome design with great functionality :)</a>
+								</div>
+								<div class="timestamp">
+									about 2 hour ago
+								</div>
+							</li>
+						</ul>
+						<div>
+							<a class="twitter-follow-button" href="https://twitter.com/paleosun">Follow <span class="user">@paleosun</span></a>
+						</div>
+					</div>
+					<div class="col">
+						<h4>Flickr Widget</h4>
+						<div class="flickr">
+							<?php
+								$limit = 8;
+								$url = "https://api.flickr.com/services/feeds/photos_public.gne?id=45437497@N00&lang=en-en&format=rss_200"; 
+
+								$rss = simplexml_load_file($url);
+								if($rss)  { 
+									$items = $rss->channel->item; 
+									echo "<ul class=\"list-unstyled\">\n";
+									$x=0;
+									foreach($items as $item) 
+									{ 
+										if ( $x < $limit ) {
+											$title = $item->title; 
+											$link = $item->link; 
+											$img_attr = $item->children("media", true)->thumbnail->attributes(); 
+											$pub_date = $item->pubDate; 
+
+											echo "<li>\n";
+											echo '<a href="' . $link . '">'; 
+											echo '<img src="' . $img_attr['url'] . '" width="' . $img_attr['width'] . '" height="' . $img_attr['height'] . '" alt="' . $title . '">'; 
+											echo '</a>'; 
+											echo "</li>\n";
+										} 
+										$x++;
+									}
+									echo "</ul>\n";
+								}  
+
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid" id="footer-inner">
+				<div class="container">
+					<div class="row row-2">
+						<div class="col c1">
+							<a class="brand navbar-brand footer-brand" href="./">{site_name}</a>
+						</div>
+						{exp:channel:entries channel='contact' limit='1' dynamic='no'}
+						<div class="col c2">
+							{if slogan}{slogan}{/if}
+							{if contact_phone OR contact_email}<br>{/if}
+							<!-- Phone number needs to be stripped of non-numberical characters...didn't know how to get phone data without echoing to page using EE. -->
+							{if contact_phone}<span class="phone">t: <a href="tel:+1{contact_phone}">{contact_phone}</a></span>{/if}
+	
+							{if contact_email}<span class="email">e: <a href="mailto:{contact_email}">{contact_email}</a></span>{/if}
+						</div>
+						<div class="col c3">
+							Copyright {current_time format='%Y'}. {if business_name}{business_name}{/if}
+						</div>
+						{/exp:channel:entries}
+					</div>        
+				</div>
+			</div>		
+		</div>		
+	</body>
+</html>

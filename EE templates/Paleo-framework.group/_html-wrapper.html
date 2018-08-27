@@ -1,0 +1,82 @@
+		{embed='Paleo-framework/_header'}
+		
+
+		<div class="container" id="featured">
+			<div class="card-deck">
+			{exp:channel:entries channel="pages" category="8" limit="4" sort="asc"}
+				<div class="card">
+					<div class="inner">
+						<h4>{title}</h4>
+						{page_content}
+						<a href="{path='/{url_title}'}" class="read-more check-border">Read More</a>
+					</div>
+				</div>
+			{/exp:channel:entries}
+			</div>
+
+		</div>
+		<div class="container section" id="portfolio">
+			{exp:channel:info channel="portfolio"}<h4 class="check-border">{channel_title}</h4>{/exp:channel:info}
+			<div class="row">
+				<div class="col-12 col-md-3 intro">
+					{exp:channel:info channel="portfolio"}{channel_description}{/exp:channel:info}
+				</div>
+				<div class="col-12 col-md-9 flexslider">
+					<ul class="slides">
+						<?php 
+							$this_slide_num = 0;
+							$perset = 6;
+							$max_slides = 7;
+
+							while ( $this_slide_num < $max_slides ) {
+								$offset = $perset * $this_slide_num;
+								 ?>
+								{exp:channel:entries channel="portfolio" sort="asc" limit="<?php echo $perset; ?>" offset="<?php echo $offset; ?>"}
+									{if count == 1}
+										<li class="slide">
+									{/if}
+									{if portfolio_image}
+										{portfolio_image}
+											<div class="port-item">
+												<a href="{path='/{url_title}'}">
+													<div class="image-wrap">
+														<img src="{portfolio_image:small}" width="{width:small}" height="{height:small}" alt="{title}" srcset="{portfolio_image:small-2x} 2x">
+													</div>
+													<div class="overlay">
+														<div class="icon"></div>
+														<div class="meta">
+															<div class="meta-item views">
+																<span class="count">{view_count_one}</span> views
+															</div>
+															<div class="meta-item likes">
+																<!-- There was a plugin that could do this, but my free "core" version of EE didn't allow me to add on. Was outside required specs, so I left likes undone. -->
+																<span class="count">0</span> likes
+															</div>
+															<div class="meta-item comments">
+																<span class="count"> {comment_total}</span> comments
+															</div>
+														</div>
+													</div>
+												</a>
+											</div>
+										{/portfolio_image}
+									{/if}
+									{if count == total_results}
+										</li>
+									{/if}
+								{/exp:channel:entries}
+								<?php
+								$this_slide_num++;
+							}
+						?>
+					</ul>
+					
+				</div><!-- /.col-12 -->
+
+			</div><!-- /.row -->
+
+
+		</div><!-- /#portfolio -->
+
+
+		{embed='Paleo-framework/_footer'}
