@@ -11,4 +11,4 @@ Files that are important/interesting:
 
 8/29/18 9:51am
 small edits to styles.css to fix negative margins on Flexslider 
-edit to _footer.html last row to fix vertical align in flexbox, 
+edit to _footer.html last row to fix vertical align in flexbox
