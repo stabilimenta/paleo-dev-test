@@ -422,8 +422,15 @@ h4
 #footer span.email { white-space: nowrap; }
 
 /* slider */
+#header .flexslider .row
+{
+	margin-right: 0;
+	margin-left: 0;
+}
 
 #header .flexslider .text-wrap { padding: 5% 0 5% 0; }
+
+#header .flexslider .image-wrap { padding-right: 0; }
 
 /* slide image specific adjustments */
 #header .slide-1 .image-wrap img /* computer screen */
@@ -673,8 +680,6 @@ h4.check-border
 		margin-top: 0;
 	}
 
-	#header { /* padding-bottom: 5%; */ }
-	
 	#featured { margin-top: -7%; }
 
 	#featured .card
