@@ -10,5 +10,5 @@ Files that are important/interesting:
  •  EE templates/Paleo-framework.group/_footer.html
 
 8/29/18 9:51am
-small edits to styles.css to fix negative margins on Flexslider 
+small edits to styles.css to fix negative margins on Flexslider; 
 edit to _footer.html last row to fix vertical align in flexbox
