@@ -1,6 +1,6 @@
 # paleo-dev-test
 
-Contains ExpressionEngine 4.3 template files, and included css and graphics used on demonstration test site.
+A developer's test for PaleoSun Web Developers (paleosun.com). Contains ExpressionEngine 4.3 template files, and included css and graphics used on demonstration test site.
 
 Files that are important/interesting:
   • css/styles.css
